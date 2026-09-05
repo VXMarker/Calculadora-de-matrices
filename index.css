@@ -2,17 +2,15 @@
 
 :root {
   --main-font: "Outfit", sans-serif;
+
   --main-page-color: #131313;
   --main-letter-color: #bbbbbb;
+
   --main-border-color: rgb(73, 70, 70);
+
   --main-color-blue: rgb(16, 101, 150);
   --main-color-red: rgb(207, 10, 10);
   --main-color-yellow: rgb(204, 207, 10);
-}
-
-.dark {
-  --main-page-color: #bbbbbb;
-  --main-letter-color: #131313;
 }
 
 *,
@@ -21,7 +19,229 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
   border: none;
   text-decoration: none;
   list-style: none;
+}
+
+body {
+  font-family: var(--main-font);
+
+  background-color: var(--main-page-color);
+
+  min-height: 100vh;
+  min-width: 100vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+
+  color: #fff;
+}
+
+.main-content {
+  background-color: #0049b1;
+
+  height: 100vh;
+  width: 100%;
+
+  overflow: auto;
+}
+.contain-matriz {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.contain-matriz .matriz {
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+
+  width: fit-content;
+  height: fit-content;
+
+  max-width: 700px;
+
+  padding: 30px;
+}
+
+.fila-container {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  width: fit-content;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.contain-matriz .matriz .fila {
+  display: flex;
+
+  flex-wrap: nowrap;
+
+  gap: 10px;
+
+  width: fit-content;
+
+  cursor: grab;
+
+  user-select: none;
+
+  touch-action: none;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+.contain-matriz .matriz .fila:hover {
+  background-color: #bbbbbb;
+}
+
+/*
+   Cuando estamos arrastrando
+*/
+
+.fila.dragging {
+  cursor: grabbing;
+
+  opacity: 0.75;
+
+  transform: scale(1.02);
+
+  z-index: 100;
+
+  background-color: #393646;
+}
+
+/* =========================================
+   ELEMENTOS DE LA MATRIZ
+========================================= */
+
+.contain-matriz .matriz .fila .element {
+  background-color: #393646;
+
+  width: 56px;
+  height: 56px;
+
+  flex-shrink: 0;
+  flex-grow: 0;
+
+  aspect-ratio: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  user-select: none;
+
+  border: 2px solid #fff;
+
+  border-radius: 4px;
+
+  pointer-events: none;
+}
+
+.contain-matriz .matriz .fila .element p {
+  user-select: none;
+
+  width: 100%;
+
+  text-align: center;
+
+  font-size: 15px;
+}
+
+.contain-matriz .matriz .fila .element span {
+  height: 2px;
+
+  width: 30px;
+
+  margin: 2px 0;
+
+  background-color: #fff;
+}
+
+/* =========================================
+   CHECKBOX DE LA FILA
+========================================= */
+
+.fila-check {
+  width: 32px;
+  height: 32px;
+
+  flex-shrink: 0;
+
+  border: 2px solid #fff;
+
+  border-radius: 5px;
+
+  background-color: transparent;
+
+  cursor: pointer;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* =========================================
+   CHECK
+========================================= */
+
+.fila-check span {
+  width: 10px;
+  height: 6px;
+
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+
+  transform: rotate(-45deg) scale(0);
+
+  transition: transform 0.2s ease;
+}
+
+/* =========================================
+   CHECKBOX ACTIVADO
+========================================= */
+
+.fila-container.selected .fila-check {
+  background-color: var(--main-color-blue);
+}
+
+.fila-container.selected .fila-check span {
+  transform: rotate(-45deg) scale(1);
+}
+
+/* =========================================
+   HOVER
+========================================= */
+
+.fila-check:hover {
+  transform: scale(1.1);
+}
+
+/* =========================================
+   FILA SOBRE LA QUE SE PASA
+========================================= */
+
+.fila-container.drag-over {
+  transform: translateY(4px);
 }
