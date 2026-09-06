@@ -8,7 +8,7 @@ export const filSwap = (filA, filB) => {
   if (!containerA || !containerB) return;
 
   const placeholder = document.createElement("div"); //definimos un medio de cambio
-  placeholder.hidden = true;
+  placeholder.hidden = true; //ocultar medio de cambio
 
   containerA.replaceWith(placeholder); //realizamos el intercambio
   containerB.replaceWith(containerA);
